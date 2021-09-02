@@ -5,6 +5,13 @@ default_config:
 homeassistant:
   packages: !include_dir_named packages
 
+group: !include groups.yaml
+lovelace: !include lovelace.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+camera: !include cameras.yaml
+
 # Change database location:
 # https://www.home-assistant.io/integrations/recorder/
 recorder:
