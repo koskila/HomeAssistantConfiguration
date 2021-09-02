@@ -6,3 +6,6 @@ HomeAssistant/.cloud*
 HomeAssistant/$haPath*
 HomeAssistant/tts*
 HomeAssistant/deps*
+debug.log
+HomeAssistant/home-assistant.log*
+.vscode*
