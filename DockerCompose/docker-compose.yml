@@ -1,0 +1,15 @@
+version: '3'
+services:
+  homeassistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant:2021.9.0 #https://hub.docker.com/r/homeassistant/home-assistant/tags?page=2
+    privileged: yes
+    #network_mode: host # This won't work on Windows...
+    volumes:
+     - C:/Users/posti/OneDrive - Koskila (MVP)/config/HA/HomeAssistant:/config # Shares the configuration directory
+     - C:/HA_db:/db
+    environment:
+      - TZ=Europe/Helsinki
+    restart: always
+    ports:
+      - 8123:8123
