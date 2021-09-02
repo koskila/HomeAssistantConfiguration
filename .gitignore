@@ -1,0 +1,8 @@
+
+HomeAssistant/home-assistant.log
+HomeAssistant/secrets.yaml
+HomeAssistant/.storage*
+HomeAssistant/.cloud*
+HomeAssistant/$haPath*
+HomeAssistant/tts*
+HomeAssistant/deps*
