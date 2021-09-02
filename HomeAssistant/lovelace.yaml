@@ -2,6 +2,10 @@ mode: yaml
 # Include external resources only add when mode is yaml, otherwise manage in the resources in the lovelace configuration panel.
 resources:
 
+# Garbage Collection custom card
+- type: module
+  url: /local/garbage-collection-card/garbage-collection-card.js
+
 dashboards:
   dashboard-important: # Needs to contain a hyphen (-)
     mode: yaml
