@@ -1,0 +1,22 @@
+# This is here for a reason - it includes stuff like mobile app configuration already.
+default_config:
+
+# This includes packages such as "landroids.yaml" in the /packages folder
+homeassistant:
+  packages: !include_dir_named packages
+
+# Change database location:
+# https://www.home-assistant.io/integrations/recorder/
+recorder:
+  db_url: sqlite:////db/home-assistant_v2.db
+
+
+# Discovery of devices automatically if supported
+discovery:
+
+stream:
+ffmpeg:
+
+logger:
+  default: info
+
