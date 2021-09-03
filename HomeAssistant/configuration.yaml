@@ -27,3 +27,10 @@ ffmpeg:
 logger:
   default: info
 
+  
+# Ecovacs Deebot N79S
+ecovacs:
+  username: !secret ecovacs_username
+  password: !secret ecovacs_password
+  country: fi
+  continent: eu

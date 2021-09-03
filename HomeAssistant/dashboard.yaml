@@ -12,3 +12,19 @@ views:
             icon_color: green
             hide_date: false
 
+
+  - path: spares
+    title: ➕
+    cards:
+      # Ecovacs Deebot N79S
+      - type: entities
+        title: Vacuum
+        entities:
+        - entity: vacuum.e000p8u2317701282290
+      - type: 'custom:vacuum-card'
+        entity: vacuum.e000p8u2317701282290
+        image: default
+        compact_view: false
+        show_name: true
+        show_toolbar: true
+        show_status: true
