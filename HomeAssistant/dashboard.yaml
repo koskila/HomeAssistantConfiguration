@@ -5,6 +5,20 @@ views:
     badges:
 
     cards:
+      - type: vertical-stack
+        cards:
+          # Date & Time
+          - type: picture-elements    
+            image: /local/white.png?v=2
+            elements:      
+            - type: state-label
+              entity: sensor.date_time
+              style:
+                top: 50%
+                left: 50%
+                font-size: 3vh
+                color: black
+
           # Garbage Collection cards
           - type: custom:garbage-collection-card
             entity: sensor.garbage
