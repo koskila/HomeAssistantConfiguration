@@ -27,6 +27,15 @@ ffmpeg:
 logger:
   default: info
 
+# Simple scheduled countdowns
+garbage_collection:
+  sensors:
+  - name: garbage
+    frequency: 'every-n-weeks'
+    collection_days: tue
+    period: 2
+    first_week: 1 # This might change year-on-year
+
   
 # Ecovacs Deebot N79S
 ecovacs:
