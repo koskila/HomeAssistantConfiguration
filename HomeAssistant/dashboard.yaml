@@ -42,3 +42,11 @@ views:
         show_name: true
         show_toolbar: true
         show_status: true
+      - type: history-graph
+        entities:
+          - entity: sensor.speedtest_download
+          - entity: sensor.speedtest_upload
+          - entity: sensor.speedtest_ping
+        hours_to_show: 48
+        refresh_interval: 180
+
