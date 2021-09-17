@@ -6,6 +6,11 @@ resources:
 - type: module
   url: /local/garbage-collection-card/garbage-collection-card.js
 
+# Sun card 
+# https://github.com/AitorDB/home-assistant-sun-card
+- type: js
+  url: /local/home-assistant-sun-card.js?v=1
+
 dashboards:
   dashboard-important: # Needs to contain a hyphen (-)
     mode: yaml

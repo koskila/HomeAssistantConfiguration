@@ -26,6 +26,9 @@ views:
             icon_color: green
             hide_date: false
 
+      # Where's the sun located?
+      - type: 'custom:sun-card'
+
 
   - path: spares
     title: ➕
