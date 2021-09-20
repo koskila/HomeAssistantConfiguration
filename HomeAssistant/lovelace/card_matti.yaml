@@ -1,0 +1,320 @@
+type: vertical-stack
+cards:
+- type: picture-elements
+  image: /local/mower/landroid_flower.png
+  elements:
+  - type: state-icon
+    title: WIFI Quality
+    entity: sensor.landroid_matti_wifi
+    style:
+      top: 0%
+      left: 0%
+      transform: none
+      --paper-item-icon-color: rgb(3, 169, 244)
+  - type: state-label
+    title: WIFI Quality
+    entity: sensor.landroid_matti_wifi
+    style:
+      top: 1%
+      left: 9%
+      transform: none
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-icon
+    title: Battery Status
+    entity: sensor.landroid_matti_battery
+    style:
+      top: 0%
+      right: 0%
+      transform: none
+      --paper-item-icon-color: rgb(3, 169, 244)
+  - type: state-label
+    title: Battery
+    entity: sensor.landroid_matti_battery
+    style:
+      top: 1%
+      right: 8%
+      transform: none
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-label
+    title: Status
+    entity: sensor.landroid_matti_status
+    style:
+      top: 7%
+      left: 0%
+      transform: none
+      font-size: 150%
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-label
+    title: Status
+    entity: sensor.landroid_matti_error
+    style:
+      top: 13%
+      left: 0%
+      transform: none
+      font-size: 150%
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-icon
+    title: Pitch
+    entity: sensor.landroid_matti_pitch
+    style:
+      top: 9%
+      right: 0%
+      transform: none
+      --paper-item-icon-color: rgb(3, 169, 244)
+  - type: state-label
+    title: Pitch
+    entity: sensor.landroid_matti_pitch
+    style:
+      top: 10%
+      right: 8%
+      transform: none
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-icon
+    title: Roll
+    entity: sensor.landroid_matti_roll
+    style:
+      top: 18%
+      right: 0%
+      transform: none
+      --paper-item-icon-color: rgb(3, 169, 244)
+  - type: state-label
+    title: Roll
+    entity: sensor.landroid_matti_roll
+    style:
+      top: 19%
+      right: 8%
+      transform: none
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-icon
+    title: Yaw
+    entity: sensor.landroid_matti_yaw
+    style:
+      top: 26%
+      right: 0%
+      transform: none
+      --paper-item-icon-color: rgb(3, 169, 244)
+  - type: state-label
+    title: Yaw
+    entity: sensor.landroid_matti_yaw
+    style:
+      top: 27%
+      right: 8%
+      transform: none
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-icon
+    title: Total Distance
+    entity: sensor.landroid_matti_dist
+    style:
+      top: 26%
+      left: 31%
+      transform: none
+      --paper-item-icon-color: rgb(3, 169, 244)
+  - type: state-label
+    title: Total Distance
+    entity: sensor.landroid_matti_dist
+    style:
+      top: 27%
+      left: 40%
+      transform: none
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-icon
+    title: Total Time
+    entity: sensor.landroid_matti_totaltime
+    style:
+      top: 41%
+      left: 31%
+      transform: none
+      --paper-item-icon-color: rgb(3, 169, 244)
+  - type: state-label
+    title: Total Time
+    entity: sensor.landroid_matti_totaltime
+    style:
+      top: 40%
+      left: 40%
+      transform: none
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-label
+    title: Total Time
+    entity: sensor.landroid_matti_totaltime
+    attribute: time_formatted
+    style:
+      top: 45%
+      left: 40%
+      transform: none
+      font-size: 10px
+      font-style: italic
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-icon
+    title: Blade Time
+    entity: sensor.landroid_matti_bladetime
+    style:
+      top: 56%
+      left: 31%
+      transform: none
+      --paper-item-icon-color: rgb(3, 169, 244)
+  - type: state-label
+    title: Blade Time
+    entity: sensor.landroid_matti_bladetime
+    style:
+      top: 55%
+      left: 40%
+      transform: none
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: state-label
+    title: Blade Time
+    entity: sensor.landroid_matti_bladetime
+    attribute: time_formatted
+    style:
+      top: 60%
+      left: 40%
+      transform: none
+      font-size: 10px
+      font-style: italic
+      font-weight: bold
+      color: rgb(3, 169, 244)
+  - type: image
+    title: Scheduler
+    entity: input_boolean.landroid_matti_sched_settings
+    image: /local/mower/timer-off.png
+    tap_action:
+      action: toggle
+    state_filter:
+      'off': brightness(100%) saturate(1)
+      'on': brightness(90%) saturate(1)
+    state_image:
+      'on': /local/mower/timer.png
+    style:
+      bottom: 4%
+      left: 45%
+      transform: translate(-280%, 25%) scale(0.7, 0.7)
+  - type: icon
+    title: Mow
+    icon: mdi:play
+    tap_action:
+      action: call-service
+      service: script.landroid_matti_start
+    style:
+      bottom: 4%
+      left: 45%
+      transform: translate(-260%, 0%) scale(1.6, 1.6)
+      color: rgb(250, 250, 250)
+  - type: icon
+    title: Pause
+    icon: mdi:pause
+    tap_action:
+      action: call-service
+      service: script.landroid_matti_pause
+    style:
+      bottom: 4%
+      left: 45%
+      transform: translate(0%, 0%) scale(1.6, 1.6)
+      color: rgb(250, 250, 250)
+  - type: icon
+    title: Stop & Drive Home
+    icon: mdi:home
+    tap_action:
+      action: call-service
+      service: script.landroid_matti_home
+    style:
+      bottom: 4%
+      left: 45%
+      transform: translate(260%, 0%) scale(1.6, 1.6)
+      color: rgb(250, 250, 250)
+  - type: image
+    title: Information
+    entity: input_boolean.landroid_matti_info_toggle
+    image: /local/mower/info-off.png
+    tap_action:
+      action: toggle
+    state_filter:
+      'off': brightness(100%) saturate(1)
+      'on': brightness(90%) saturate(1)
+    state_image:
+      'on': /local/mower/information.png
+    style:
+      bottom: 4%
+      left: 45%
+      transform: translate(240%, 25%) scale(0.7, 0.7)
+  - entity: sensor.landroid_matti_name
+    style:
+      color: rgb(3, 169, 244)
+      font-size: 200%
+      font-weight: bold
+      left: 50%
+      top: 1%
+      transform: translate(-50%, 0%)
+    type: state-label
+- type: conditional
+  conditions:
+  - entity: input_boolean.landroid_matti_sched_settings
+    state: 'on'
+  card:
+    type: entities
+    title: Config
+    show_header_toggle: false
+    entities:
+    - entity: input_number.landroid_matti_raindelay
+    - entity: input_number.landroid_matti_timeextension
+    - entity: script.landroid_matti_set_config
+- type: conditional
+  conditions:
+  - entity: input_boolean.landroid_matti_info_toggle
+    state: 'on'
+  card:
+    type: entities
+    title: Information
+    show_header_toggle: false
+    entities:
+    - type: custom:fold-entity-row
+      head: sensor.landroid_matti_lastupdate
+      entities:
+      - entity: sensor.landroid_matti_name
+      - entity: sensor.landroid_matti_id
+      - entity: sensor.landroid_matti_ip
+      - entity: sensor.landroid_matti_sn
+      - entity: sensor.landroid_matti_mac
+      - type: attribute
+        entity: sensor.landroid_matti_status
+        attribute: firmware_version
+        name: Firmware
+        icon: mdi:information-variant
+    - type: section
+      label: Configuration
+    - type: attribute
+      attribute: raindelay
+      entity: sensor.landroid_matti_status
+      icon: mdi:weather-lightning-rainy
+      name: Rain delay
+      suffix: min
+    - type: attribute
+      entity: sensor.landroid_matti_status
+      attribute: timeextension
+      name: Time extension
+      suffix: '%'
+      icon: mdi:clock
+    - type: custom:fold-entity-row
+      head:
+        type: section
+        label: Automation
+      entities:
+      - entity: automation.landroid_matti_notify_error
+      - entity: automation.landroid_matti_notify_status
+      - entity: automation.landroid_matti_sync_values
+- type: history-graph
+  title: 'Landroid statuses'
+  entities:
+    - entity: sensor.landroid_matti_status
+      name: Matti status
+    - entity: sensor.landroid_teppo_status
+      name: Teppo status

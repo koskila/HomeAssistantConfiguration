@@ -1,0 +1,466 @@
+# Worx Landroid (M500 WR141E) package
+# https://github.com/Barma-lej/halandroid
+# Based on Landroid Cloud by @MTrab
+# https://github.com/MTrab/landroid_cloud
+
+# Cloud #############################################################
+landroid_cloud:
+  email: !secret landroid_mail
+  password: !secret landroid_pass
+
+recorder:
+  exclude:
+    entities:
+    - sensor.landroid_matti_ip
+    - sensor.landroid_matti_sn
+    - sensor.landroid_matti_mac
+    - sensor.landroid_matti_lastupdate
+    - input_number.landroid_matti_raindelay
+    - input_number.landroid_matti_timeextension
+    - input_boolean.landroid_matti_info_toggle
+    - input_boolean.landroid_matti_sched_settings
+    - automation.landroid_matti_notify_status
+    - automation.landroid_matti_notify_error
+    - automation.landroid_matti_sync_values
+    - script.landroid_matti_start
+    - script.landroid_matti_stop
+    - script.landroid_matti_pause
+    - script.landroid_matti_set_config
+    - sensor.landroid_matti_name
+    - sensor.landroid_matti_id
+    - sensor.landroid_teppo_ip
+    - sensor.landroid_teppo_sn
+    - sensor.landroid_teppo_mac
+    - sensor.landroid_teppo_lastupdate
+    - input_number.landroid_teppo_raindelay
+    - input_number.landroid_teppo_timeextension
+    - input_boolean.landroid_teppo_info_toggle
+    - input_boolean.landroid_teppo_sched_settings
+    - automation.landroid_teppo_notify_status
+    - automation.landroid_teppo_notify_error
+    - automation.landroid_teppo_sync_values
+    - script.landroid_teppo_start
+    - script.landroid_teppo_stop
+    - script.landroid_teppo_pause
+    - script.landroid_teppo_set_config
+    - sensor.landroid_teppo_name
+    - sensor.landroid_teppo_id
+logbook:
+  exclude:
+    entities:
+    - sensor.landroid_matti_ip
+    - sensor.landroid_matti_sn
+    - sensor.landroid_matti_mac
+    - sensor.landroid_matti_lastupdate
+    - input_number.landroid_matti_raindelay
+    - input_number.landroid_matti_timeextension
+    - input_boolean.landroid_matti_info_toggle
+    - input_boolean.landroid_matti_sched_settings
+    - automation.landroid_matti_notify_status
+    - automation.landroid_matti_notify_error
+    - automation.landroid_matti_sync_values
+    - script.landroid_matti_start
+    - script.landroid_matti_stop
+    - script.landroid_matti_pause
+    - script.landroid_matti_set_config
+    - sensor.landroid_matti_name
+    - sensor.landroid_matti_id
+    - sensor.landroid_teppo_ip
+    - sensor.landroid_teppo_sn
+    - sensor.landroid_teppo_mac
+    - sensor.landroid_teppo_lastupdate
+    - input_number.landroid_teppo_raindelay
+    - input_number.landroid_teppo_timeextension
+    - input_boolean.landroid_teppo_info_toggle
+    - input_boolean.landroid_teppo_sched_settings
+    - automation.landroid_teppo_notify_status
+    - automation.landroid_teppo_notify_error
+    - automation.landroid_teppo_sync_values
+    - script.landroid_teppo_start
+    - script.landroid_teppo_stop
+    - script.landroid_teppo_pause
+    - script.landroid_teppo_set_config
+    - sensor.landroid_teppo_name
+    - sensor.landroid_teppo_id
+switch:
+- platform: template
+  switches:
+    landroid_matti_mowing:
+      value_template: '{{ is_state_attr(''sensor.landroid_matti_status'', ''status_id'',
+        7) }}'
+      turn_on:
+        service: script.landroid_matti_start
+      turn_off:
+        service: script.landroid_matti_stop
+    landroid_teppo_mowing:
+      value_template: '{{ is_state_attr(''sensor.landroid_teppo_status'', ''status_id'',
+        7) }}'
+      turn_on:
+        service: script.landroid_teppo_start
+      turn_off:
+        service: script.landroid_teppo_stop
+template:
+  sensor:
+  - name: Landroid IP
+    unique_id: landroid_teppo_ip
+    state: ''
+    icon: mdi:ip-network
+  - name: Landroid SN
+    unique_id: landroid_teppo_sn
+    state: ''
+    icon: mdi:numeric
+  - name: Landroid MAC
+    unique_id: landroid_teppo_mac
+    state: ''
+    icon: mdi:barcode
+  - name: Landroid Bladetime
+    unique_id: landroid_teppo_bladetime
+    state: '{{ state_attr(''sensor.landroid_teppo_status'', ''blade_time'') }}'
+    icon: mdi:fan
+    unit_of_measurement: min
+    attributes:
+      time_formatted: "{% set t = state_attr(\"sensor.landroid_teppo_status\", \"\
+        blade_time\") | int %} {% if t != 0 %}\n  {{ \"%0d d %0.02d h %0.02d min\"\
+        \ | format(t // 1440, ((t % 1440) // 60), t % 60) }}\n{%- else -%}\n  {{ '0\
+        \ min' }}\n{% endif %}\n"
+  - name: Landroid Totaltime
+    unique_id: landroid_teppo_totaltime
+    state: '{{ state_attr(''sensor.landroid_teppo_status'', ''work_time'') }}'
+    icon: mdi:bus-clock
+    unit_of_measurement: min
+    attributes:
+      time_formatted: "{% set t = state_attr(\"sensor.landroid_teppo_status\", \"\
+        work_time\") | int %} {% if t != 0 %}\n  {{ \"%0d d %0.02d h %0.02d min\"\
+        \ | format(t // 1440, ((t % 1440) // 60), t % 60) }}\n{%- else -%}\n  {{ '0\
+        \ min' }}\n{% endif %}\n"
+  - name: Landroid Dist
+    unique_id: landroid_teppo_dist
+    state: '{{ (state_attr(''sensor.landroid_teppo_status'', ''distance'') | float)
+      / 1000 }}'
+    icon: mdi:map-marker-distance
+    unit_of_measurement: km
+  - name: Landroid lastupdate
+    unique_id: landroid_teppo_lastupdate
+    state: '{{ as_timestamp(strptime( state_attr(''sensor.landroid_teppo_status'',
+      ''last_update''), ''%H:%M:%S %d/%m/%Y'')) | timestamp_custom(''%d.%m.%Y %H:%M:%S'')
+      }}'
+    icon: mdi:clock
+  - name: Landroid Teppo WIFI
+    unique_id: landroid_teppo_wifi
+    state: '{{ state_attr(''sensor.landroid_teppo_status'', ''rssi'') }}'
+    device_class: signal_strength
+    unit_of_measurement: dBm
+    icon: '{% set strength = state_attr("sensor.landroid_teppo_status", "rssi") |
+      float -%} {%- if strength > -56 -%}mdi:wifi-strength-4 {% elif strength > -67
+      -%}mdi:wifi-strength-3 {% elif strength > -78 -%}mdi:wifi-strength-2 {% elif
+      strength > -89 -%}mdi:wifi-strength-1 {%- else -%}mdi:wifi-strength-outline
+      {%- endif %}'
+  - name: Landroid Yaw
+    unique_id: landroid_teppo_yaw
+    state: '{{ state_attr(''sensor.landroid_teppo_status'', ''yaw'') }}'
+    icon: mdi:axis-z-rotate-clockwise
+    unit_of_measurement: "\xB0"
+  - name: Landroid Teppo Roll
+    unique_id: landroid_teppo_roll
+    state: '{{ state_attr(''sensor.landroid_teppo_status'', ''roll'') }}'
+    icon: mdi:axis-x-rotate-clockwise
+    unit_of_measurement: "\xB0"
+  - name: Landroid Teppo Pitch
+    unique_id: landroid_teppo_pitch
+    state: '{{ state_attr(''sensor.landroid_teppo_status'', ''pitch'') }}'
+    icon: mdi:seat-flat-angled
+    unit_of_measurement: "\xB0"
+
+  # Manually added:
+  - name: Landroid Matti IP
+    unique_id: landroid_matti_ip
+    state: ''
+    icon: mdi:ip-network
+  - name: Landroid Matti SN
+    unique_id: landroid_matti_sn
+    state: ''
+    icon: mdi:numeric
+  - name: Landroid Matti MAC
+    unique_id: landroid_matti_mac
+    state: ''
+    icon: mdi:barcode
+  - name: Landroid Matti Bladetime
+    unique_id: landroid_matti_bladetime
+    state: '{{ state_attr(''sensor.landroid_matti_status'', ''blade_time'') }}'
+    icon: mdi:fan
+    unit_of_measurement: min
+    attributes:
+      time_formatted: "{% set t = state_attr(\"sensor.landroid_matti_status\", \"\
+        blade_time\") | int %} {% if t != 0 %}\n  {{ \"%0d d %0.02d h %0.02d min\"\
+        \ | format(t // 1440, ((t % 1440) // 60), t % 60) }}\n{%- else -%}\n  {{ '0\
+        \ min' }}\n{% endif %}\n"
+  - name: Landroid Matti Totaltime
+    unique_id: landroid_matti_totaltime
+    state: '{{ state_attr(''sensor.landroid_matti_status'', ''work_time'') }}'
+    icon: mdi:bus-clock
+    unit_of_measurement: min
+    attributes:
+      time_formatted: "{% set t = state_attr(\"sensor.landroid_matti_status\", \"\
+        work_time\") | int %} {% if t != 0 %}\n  {{ \"%0d d %0.02d h %0.02d min\"\
+        \ | format(t // 1440, ((t % 1440) // 60), t % 60) }}\n{%- else -%}\n  {{ '0\
+        \ min' }}\n{% endif %}\n"
+  - name: Landroid Matti Dist
+    unique_id: landroid_matti_dist
+    state: '{{ (state_attr(''sensor.landroid_matti_status'', ''distance'') | float)
+      / 1000 }}'
+    icon: mdi:map-marker-distance
+    unit_of_measurement: km
+  - name: Landroid Matti lastupdate
+    unique_id: landroid_matti_lastupdate
+    state: '{{ as_timestamp(strptime( state_attr(''sensor.landroid_matti_status'',
+      ''last_update''), ''%H:%M:%S %d/%m/%Y'')) | timestamp_custom(''%d.%m.%Y %H:%M:%S'')
+      }}'
+    icon: mdi:clock
+  - name: Landroid Matti WIFI
+    unique_id: landroid_matti_wifi
+    state: '{{ state_attr(''sensor.landroid_matti_status'', ''rssi'') }}'
+    device_class: signal_strength
+    unit_of_measurement: dBm
+    icon: '{% set strength = state_attr("sensor.landroid_matti_status", "rssi") |
+      float -%} {%- if strength > -56 -%}mdi:wifi-strength-4 {% elif strength > -67
+      -%}mdi:wifi-strength-3 {% elif strength > -78 -%}mdi:wifi-strength-2 {% elif
+      strength > -89 -%}mdi:wifi-strength-1 {%- else -%}mdi:wifi-strength-outline
+      {%- endif %}'
+  - name: Landroid Matti Yaw
+    unique_id: landroid_matti_yaw
+    state: '{{ state_attr(''sensor.landroid_matti_status'', ''yaw'') }}'
+    icon: mdi:axis-z-rotate-clockwise
+    unit_of_measurement: "\xB0"
+  - name: Landroid Matti Roll
+    unique_id: landroid_matti_roll
+    state: '{{ state_attr(''sensor.landroid_matti_status'', ''roll'') }}'
+    icon: mdi:axis-x-rotate-clockwise
+    unit_of_measurement: "\xB0"
+  - name: Landroid Matti Pitch
+    unique_id: landroid_matti_pitch
+    state: '{{ state_attr(''sensor.landroid_matti_status'', ''pitch'') }}'
+    icon: mdi:seat-flat-angled
+    unit_of_measurement: "\xB0"
+  # End-of-manually added
+
+input_number:
+  landroid_matti_raindelay:
+    name: Rain delay
+    initial: 150
+    min: 0
+    max: 300
+    step: 30
+    unit_of_measurement: min
+    icon: mdi:weather-lightning-rainy
+  landroid_matti_timeextension:
+    name: Time extension
+    initial: 0
+    min: -100
+    max: 100
+    step: 10
+    unit_of_measurement: '%'
+    icon: mdi:clock-out
+  landroid_teppo_raindelay:
+    name: Rain delay
+    initial: 150
+    min: 0
+    max: 300
+    step: 30
+    unit_of_measurement: min
+    icon: mdi:weather-lightning-rainy
+  landroid_teppo_timeextension:
+    name: Time extension
+    initial: 0
+    min: -100
+    max: 100
+    step: 10
+    unit_of_measurement: '%'
+    icon: mdi:clock-out
+input_boolean:
+  landroid_matti_sched_settings:
+    name: Scheduler settings
+    icon: mdi:file-hidden
+    initial: false
+  landroid_matti_info_toggle:
+    name: Info toggle
+    icon: mdi:file-hidden
+    initial: false
+  landroid_teppo_sched_settings:
+    name: Scheduler settings
+    icon: mdi:file-hidden
+    initial: false
+  landroid_teppo_info_toggle:
+    name: Info toggle
+    icon: mdi:file-hidden
+    initial: false
+automation:
+- id: landroid_matti_notify_status
+  alias: Landroid matti Notify Status
+  initial_state: false
+  trigger:
+  - platform: state
+    entity_id: sensor.landroid_matti_status
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+  action:
+  - service: persistent_notification.create
+    data:
+      title: "\U0001F3CE\uFE0F Landroid Mower"
+      message: '{{ trigger.to_state.state }} <- {{ trigger.from_state.state }} - {{
+        states(''sensor.date_time'') }}'
+- id: landroid_matti_notify_error
+  alias: Landroid matti Notify Error
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: sensor.landroid_matti_error
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+  action:
+  - service: persistent_notification.create
+    data:
+      title: "\U0001F3CE\uFE0F Landroid Mower"
+      message: '{{ trigger.to_state.state }} <- {{ trigger.from_state.state }} - {{
+        states(''sensor.date_time'') }}'
+- id: landroid_matti_sync_values
+  alias: Landroid matti sync values
+  trigger:
+  - platform: homeassistant
+    event: start
+  - platform: state
+    entity_id: sensor.landroid_matti_lastupdate
+  action:
+  - service: input_number.set_value
+    data:
+      entity_id: input_number.landroid_matti_raindelay
+      value: '{{ state_attr(''sensor.landroid_matti_status'',''raindelay'') | int
+        }}'
+  - service: input_number.set_value
+    data:
+      entity_id: input_number.landroid_matti_timeextension
+      value: '{{ state_attr(''sensor.landroid_matti_status'',''timeextension'') |
+        int }}'
+- id: landroid_teppo_notify_status
+  alias: Landroid teppo Notify Status
+  initial_state: false
+  trigger:
+  - platform: state
+    entity_id: sensor.landroid_teppo_status
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+  action:
+  - service: persistent_notification.create
+    data:
+      title: "\U0001F3CE\uFE0F Landroid Mower"
+      message: '{{ trigger.to_state.state }} <- {{ trigger.from_state.state }} - {{
+        states(''sensor.date_time'') }}'
+- id: landroid_teppo_notify_error
+  alias: Landroid teppo Notify Error
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: sensor.landroid_teppo_error
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+  action:
+  - service: persistent_notification.create
+    data:
+      title: "\U0001F3CE\uFE0F Landroid Mower"
+      message: '{{ trigger.to_state.state }} <- {{ trigger.from_state.state }} - {{
+        states(''sensor.date_time'') }}'
+- id: landroid_teppo_sync_values
+  alias: Landroid teppo sync values
+  trigger:
+  - platform: homeassistant
+    event: start
+  - platform: state
+    entity_id: sensor.landroid_teppo_lastupdate
+  action:
+  - service: input_number.set_value
+    data:
+      entity_id: input_number.landroid_teppo_raindelay
+      value: '{{ state_attr(''sensor.landroid_teppo_status'',''raindelay'') | int
+        }}'
+  - service: input_number.set_value
+    data:
+      entity_id: input_number.landroid_teppo_timeextension
+      value: '{{ state_attr(''sensor.landroid_teppo_status'',''timeextension'') |
+        int }}'
+script:
+  landroid_matti_start:
+    alias: Landroid matti Start
+    sequence:
+      service: landroid_cloud.start
+      data:
+        id: '{{ state_attr(''sensor.landroid_matti_status'',''id'') }}'
+  landroid_matti_home:
+    alias: Landroid matti Home
+    sequence:
+      service: landroid_cloud.home
+      data:
+        id: '{{ state_attr(''sensor.landroid_matti_status'',''id'') }}'
+  landroid_matti_pause:
+    alias: Landroid matti Pause
+    sequence:
+      service: landroid_cloud.pause
+      data:
+        id: '{{ state_attr(''sensor.landroid_matti_status'',''id'') }}'
+  landroid_matti_set_config:
+    alias: Landroid matti set config
+    sequence:
+      service: landroid_cloud.config
+      data:
+        id: '{{ state_attr(''sensor.landroid_matti_status'',''id'') }}'
+        raindelay: '{{ states(''input_number.landroid_matti_raindelay'') | int }}'
+        timeextension: '{{ states(''input_number.landroid_matti_timeextension'') |
+          int }}'
+  landroid_teppo_start:
+    alias: Landroid teppo Start
+    sequence:
+      service: landroid_cloud.start
+      data:
+        id: '{{ state_attr(''sensor.landroid_teppo_status'',''id'') }}'
+  landroid_teppo_home:
+    alias: Landroid teppo Home
+    sequence:
+      service: landroid_cloud.home
+      data:
+        id: '{{ state_attr(''sensor.landroid_teppo_status'',''id'') }}'
+  landroid_teppo_pause:
+    alias: Landroid teppo Pause
+    sequence:
+      service: landroid_cloud.pause
+      data:
+        id: '{{ state_attr(''sensor.landroid_teppo_status'',''id'') }}'
+  landroid_teppo_set_config:
+    alias: Landroid teppo set config
+    sequence:
+      service: landroid_cloud.config
+      data:
+        id: '{{ state_attr(''sensor.landroid_teppo_status'',''id'') }}'
+        raindelay: '{{ states(''input_number.landroid_teppo_raindelay'') | int }}'
+        timeextension: '{{ states(''input_number.landroid_teppo_timeextension'') |
+          int }}'
+sensor:
+- platform: template
+  sensors:
+    landroid_matti_name:
+      friendly_name: Mower name
+      value_template: '{{ state_attr(''sensor.landroid_matti_status'', ''friendly_name'')[:-7]
+        }}'
+    landroid_matti_id:
+      friendly_name: Mower id number
+      value_template: '{{ state_attr(''sensor.landroid_matti_status'', ''id'') }}'
+      icon_template: mdi:numeric
+    landroid_teppo_name:
+      friendly_name: Mower name
+      value_template: '{{ state_attr(''sensor.landroid_teppo_status'', ''friendly_name'')[:-7]
+        }}'
+    landroid_teppo_id:
+      friendly_name: Mower id number
+      value_template: '{{ state_attr(''sensor.landroid_teppo_status'', ''id'') }}'
+      icon_template: mdi:numeric

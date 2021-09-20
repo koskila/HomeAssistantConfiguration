@@ -26,6 +26,12 @@ views:
             icon_color: green
             hide_date: false
 
+
+      # Matti Landroid
+      - !include /config/lovelace/card_matti.yaml
+      
+      # Teppo Landroid
+      - !include /config/lovelace/card_teppo.yaml
       # Where's the sun located?
       - type: 'custom:sun-card'
 
@@ -53,3 +59,12 @@ views:
         hours_to_show: 48
         refresh_interval: 180
 
+
+  - path: mowers
+    title: 🦗
+    cards:
+      - type: entities
+        title: Mowers
+        entities:
+          - entity: sensor.landroid_matti_status
+          - entity: sensor.landroid_teppo_status

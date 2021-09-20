@@ -2,6 +2,10 @@ mode: yaml
 # Include external resources only add when mode is yaml, otherwise manage in the resources in the lovelace configuration panel.
 resources:
 
+# Used by Landroid integration cards - this one was installed with HACS, the others failed
+- type: module
+  url: /hacsfiles/lovelace-fold-entity-row/fold-entity-row.js
+
 # Garbage Collection custom card
 - type: module
   url: /local/garbage-collection-card/garbage-collection-card.js
