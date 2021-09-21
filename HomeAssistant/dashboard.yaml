@@ -26,6 +26,20 @@ views:
             icon_color: green
             hide_date: false
 
+          # Weather 
+          # https://github.com/Yevgenium/lovelace-weather-card-chart
+          - type: 'custom:weather-card-chart'
+            title: Weather today
+            weather: weather.openweathermap
+            mode: hourly
+
+          # The "new" Climacell integration is very barebones
+          # Maybe this will help spice it up? https://community.home-assistant.io/t/ha-card-weather-conditions-setup-with-climacell-tomorrow-io-integration/314398
+          - type: 'custom:weather-card-chart'
+            name: forecast_weekly_name
+            id: forecast_weekly_id
+            title: Weekly forecast
+            weather: weather.climacell_daily
 
       # Matti Landroid
       - !include /config/lovelace/card_matti.yaml
