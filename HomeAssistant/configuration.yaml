@@ -30,6 +30,9 @@ frontend:
 logger:
   default: info
 
+hacs:
+  token: !secret github_token
+
 # Simple scheduled countdowns
 garbage_collection:
   sensors:
