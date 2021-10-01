@@ -21,6 +21,12 @@ resources:
 - type: module
   url: /local/garbage-collection-card/garbage-collection-card.js
 
+# Apex Charts card
+# https://community.home-assistant.io/t/apexcharts-card-a-highly-customizable-graph-card/272877/7
+# https://reposhub.com/python/programming-with-hardware/RomRider-apexcharts-card.html#main-show-options 
+- type: module
+  url: /local/apexcharts-card.js?v=1.9.0
+  
 # Sun card 
 # https://github.com/AitorDB/home-assistant-sun-card
 - type: js

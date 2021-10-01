@@ -1,0 +1,32 @@
+path: sensors
+title: 📊
+id: 6
+cards:
+  # SONOFF APEX CHARTS CONFIG:
+  # Templates defined in dashboard.yaml
+  # https://github.com/RomRider/apexcharts-card#apex-charts-options-example
+  
+  # SONOFF SENSOR VALUES FOR TODAY
+  - type: vertical-stack
+    title: 'Sonoff 24 h'
+    cards:
+    - type: 'custom:apexcharts-card'
+      header:
+        show: true
+        title: "Humidity"
+        show_states: false
+      graph_span: 1d
+      all_series_config:
+        stroke_width: 1
+        type: line
+        show:
+          legend_value: true
+          in_header: false
+        extend_to_end: false
+      span:
+        start: day
+      apex_config:
+        yaxis:
+          max: 100
+          ticks: 10
+          decimalsInFloat: 0
