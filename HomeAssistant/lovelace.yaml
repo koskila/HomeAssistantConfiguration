@@ -32,6 +32,11 @@ resources:
 - type: js
   url: /local/home-assistant-sun-card.js?v=1
 
+
+# My custom CSS
+- type: css
+  url: /local/custom-css/custom.css
+
 dashboards:
   dashboard-important: # Needs to contain a hyphen (-)
     mode: yaml

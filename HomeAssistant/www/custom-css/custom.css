@@ -1,0 +1,7 @@
+weather-card-chart ha-card div.card div.main {
+    display: none !important;
+}
+
+weather-card-chart ha-card div.card div.attributes {
+    display: none !important;
+}
