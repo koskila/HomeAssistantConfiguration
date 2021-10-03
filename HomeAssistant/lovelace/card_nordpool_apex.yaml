@@ -1,0 +1,34 @@
+# See this for specifications: https://community.home-assistant.io/t/any-good-ideas-are-welcome-nordpool-energy-price-per-hour/34646/44
+type: 'custom:apexcharts-card'
+header:
+    show: true
+    title: Nordpool Price today & tomorrow
+    show_states: false
+graph_span: 2d
+span:
+    start: day
+series:
+    - entity: sensor.nordpool_kwh_fi_eur_3_10_024
+      name: Today
+      data_generator: |
+          return entity.attributes.raw_today.map((entry) => {
+            return [new Date(((new Date(entry.start)).getTime() + (0 * 60 * 60 * 1000))), entry.value * 100];
+          });
+      type: column
+      show:
+          legend_value: false
+          in_header: false
+      extend_to_end: false
+    - entity: sensor.nordpool_kwh_fi_eur_3_10_024
+      name: Tomorrow
+      data_generator: |
+          return entity.attributes.raw_tomorrow.map((entry) => {
+            return [new Date(new Date(entry.start).getTime() - (0 * 60 * 60 * 1000)), entry.value * 100];
+          });
+      type: column
+      show:
+          legend_value: false
+          in_header: false
+now:
+    label: "now"
+    show: true

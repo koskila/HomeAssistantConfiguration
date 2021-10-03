@@ -46,6 +46,11 @@ views:
       
       # Teppo Landroid
       - !include /config/lovelace/card_teppo.yaml
+
+      # Electricity & Solar price
+      - type: vertical-stack
+        cards:
+          - !include /config/lovelace/card_nordpool_apex.yaml
       # Where's the sun located?
       - type: 'custom:sun-card'
 
