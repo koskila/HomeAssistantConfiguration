@@ -41,3 +41,16 @@ cards:
     now:
       label: "now"
       show: true
+  - type: iframe
+    url: https://sahko.tk/
+    aspect_ratio: 125%
+    # - type: iframe
+    #   url: https://fortum.heydaypro.com/tarkka/graph.php
+    #   aspect_ratio: 75%
+    # - type: iframe
+    #   url: https://www.herrfors.fi/fi/spot-hinnat/#today-wrapper
+    #   aspect_ratio: 75%
+    # - type: iframe
+    #   url: https://www.helen.fi/sahko/sahkosopimus/porssisahko#electricityChartTabs
+    #   aspect_ratio: 25%
+    # - type: 
