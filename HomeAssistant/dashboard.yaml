@@ -55,6 +55,9 @@ views:
       - type: 'custom:sun-card'
 
 
+  # Electricity prices
+  - !include /config/lovelace/view_electricity.yaml
+
   - path: spares
     title: ➕
     cards:
