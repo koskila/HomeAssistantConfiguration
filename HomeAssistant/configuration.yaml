@@ -42,6 +42,12 @@ garbage_collection:
     period: 2
     first_week: 1 # This might change year-on-year
 
+
+# Temperature, hygro, door etc sensors
+sonoff:
+  username: !secret sonoff_username
+  password: !secret sonoff_password
+  sensors: [temperature, humidity, power, current, voltage, rssi]
   
 # Ecovacs Deebot N79S
 ecovacs:
