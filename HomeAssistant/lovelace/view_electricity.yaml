@@ -41,6 +41,44 @@ cards:
     now:
       label: "now"
       show: true
+  - type: 'custom:apexcharts-card'
+    header:
+      show: true
+      title: Fronius daily 3 months
+      show_states: false
+    graph_span: 90d
+    all_series_config:
+      stroke_width: 1
+    series:
+      - entity: sensor.fronius_day_energy
+        name: kwh
+        group_by:
+          func: max
+          duration: 1d
+        type: line
+        show:
+          legend_value: false
+          in_header: false
+        extend_to_end: false
+  - type: 'custom:apexcharts-card'
+    header:
+      show: true
+      title: PV today
+      show_states: false
+    graph_span: 1d
+    span:
+      start: day
+    series:
+    - entity: sensor.fronius_ac_power
+      name: Today
+      type: column
+      show:
+        legend_value: false
+        in_header: false
+      extend_to_end: false
+    now:
+      label: "now"
+      show: true
   - type: iframe
     url: https://sahko.tk/
     aspect_ratio: 125%
@@ -54,3 +92,33 @@ cards:
     #   url: https://www.helen.fi/sahko/sahkosopimus/porssisahko#electricityChartTabs
     #   aspect_ratio: 25%
     # - type: 
+  - type: history-graph
+    title: 'Fronius today'
+    hours_to_show: 24
+    entities:
+    - entity: sensor.fronius_ac_power
+    - entity: sensor.fronius_ac_current
+    - entity: sensor.fronius_ac_voltage
+    - entity: sensor.fronius_ac_frequency
+    - entity: sensor.fronius_dc_current
+    - entity: sensor.fronius_dc_voltage
+    - entity: sensor.fronius_day_energy
+  - type: history-graph
+    title: 'Fronius history'
+    hours_to_show: 4032
+    refresh_interval: 120
+    entities:
+    - entity: sensor.fronius_year_energy
+    - entity: sensor.fronius_total_energy
+  - type: entities
+    title: Fronius sensors
+    entities:
+    - entity: sensor.fronius_ac_power
+    - entity: sensor.fronius_ac_current
+    - entity: sensor.fronius_ac_voltage
+    - entity: sensor.fronius_ac_frequency
+    - entity: sensor.fronius_dc_current
+    - entity: sensor.fronius_dc_voltage
+    - entity: sensor.fronius_day_energy
+    - entity: sensor.fronius_year_energy
+    - entity: sensor.fronius_total_energy
