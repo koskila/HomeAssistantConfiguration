@@ -69,6 +69,10 @@ views:
       - type: vertical-stack
         cards:
           - !include /config/lovelace/card_nordpool_apex.yaml
+          - type: sensor
+            entity: sensor.fronius_ac_power
+            name: Fronius
+      
       # Where's the sun located?
       - type: 'custom:sun-card'
 
