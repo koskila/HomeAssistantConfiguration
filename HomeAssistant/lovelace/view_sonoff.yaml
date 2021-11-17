@@ -36,15 +36,17 @@ cards:
       - entity: sensor.sonoff_a48001601f_humidity
         name: Basement
       - entity: sensor.sonoff_a4800170dc_humidity
-        name: 1st floor
+        name: 1st floor lounge
       - entity: sensor.sonoff_a4800170dd_humidity
-        name: Upstairs
+        name: Upstairs lounge
       - entity: sensor.sonoff_a4800190d2_humidity
         name: Villa
       - entity: sensor.sonoff_a4800198a5_humidity
         name: Upstairs Bathroom
+      - entity: sensor.sonoff_a48001c5d4_humidity
+        name: 1st floor Bathroom
       - entity: sensor.sonoff_a480019984_humidity
-        name: Office /**
+        name: Office
     - type: 'custom:apexcharts-card'
       header:
         show: true
@@ -66,15 +68,17 @@ cards:
       - entity: sensor.sonoff_a48001601f_temperature
         name: Basement
       - entity: sensor.sonoff_a4800170dc_temperature
-        name: 1st floor
+        name: 1st floor lounge
       - entity: sensor.sonoff_a4800170dd_temperature
-        name: Upstairs
+        name: Upstairs lounge
       - entity: sensor.sonoff_a4800190d2_temperature
         name: Villa
       - entity: sensor.sonoff_a4800198a5_temperature
         name: Upstairs Bathroom
+      - entity: sensor.sonoff_a48001c5d4_temperature
+        name: 1st floor Bathroom
       - entity: sensor.sonoff_a480019984_temperature
-        name: Office /**
+        name: Office
   # SONOFF SENSOR VALUES FOR 7 DAYS
   - type: vertical-stack
     title: 'Sonoff 7 days'
