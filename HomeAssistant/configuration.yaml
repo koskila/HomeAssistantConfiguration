@@ -12,6 +12,9 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 camera: !include cameras.yaml
 
+# Add Gree Climate
+climate: !include climate.yaml
+
 # Change database location:
 # https://www.home-assistant.io/integrations/recorder/
 recorder:
