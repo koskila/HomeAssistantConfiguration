@@ -11,15 +11,18 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 camera: !include cameras.yaml
+sensor: !include sensors.yaml
 
-# Add Gree Climate
-climate: !include climate.yaml
+# Add Gree Climate (REMOVED 20.10.2023 to replace with core GREE plugin)
+#climate: !include climate.yaml
 
 # Change database location:
 # https://www.home-assistant.io/integrations/recorder/
 recorder:
   db_url: sqlite:////db/home-assistant_v2.db
 
+# About templates and sensors in general:
+# https://www.home-assistant.io/integrations/template/
 
 # Discovery of devices automatically if supported
 discovery:
@@ -27,22 +30,23 @@ discovery:
 stream:
 ffmpeg:
 
+#area: !include areas.yaml
+
 frontend:
   themes: !include_dir_merge_named themes
 
 logger:
   default: info
 
-hacs:
-  token: !secret github_token
 
 # Simple scheduled countdowns
 garbage_collection:
   sensors:
   - name: garbage
     frequency: 'every-n-weeks'
-    collection_days: tue
     period: 2
+    collection_days: 
+    - "tue"
     first_week: 1 # This might change year-on-year
 
 
@@ -60,71 +64,5 @@ ecovacs:
   continent: eu
 
 # NORDPOOL ELECTRICITY PRICES: https://github.com/custom-components/nordpool
+# (See the rest of the Nordpool stuff in sensors.yaml)
 nordpool:
-
-sensor:
-  # More Nordpool!
-  - platform: nordpool
-
-    # Should the prices include vat? Default True
-    VAT: True
-
-    # What currency the api fetches the prices in
-    # this is only need if you want a sensor in a non local currecy
-    currency: "EUR"
-
-    # Helper so you can set your "low" price
-    # low_price = hour_price < average * low_price_cutoff
-    low_price_cutoff: 0.01
-
-    # What power regions your are interested in.
-    # Possible values: "DK1", "DK2", "FI", "LT", "LV", "Oslo", "Kr.sand", "Bergen", "Molde", "Tr.heim", "Tromsø", "SE1", "SE2", "SE3","SE4", "SYS", "EE"
-    region: "FI"
-
-    # How many decimals to use in the display of the price
-    precision: 3
-
-    # What the price should be displayed in default
-    # Possible values: MWh, kWh and Wh
-    # default: kWh
-    price_type: kWh
-
-    # This option allows the usage of a template to add a tariff.
-    # now() always refers start of the hour of that price.
-    # this way we can calculate the correct costs add that to graphs etc.
-    # The price result of the additional_costs template expects this additional cost to be in kWh and not cents as a float
-    # default {{0.0|float}}
-    additional_costs: "{{0.0|float}}"
-
-  # Fronius PV (Solar Panel stuff):
-  # https://github.com/safepay/sensor.fronius
-  - platform: fronius_inverter
-    ip_address: 192.168.1.166
-    powerflow: False
-    power_units: kW
-    monitored_conditions:
-      - ac_power
-      - ac_current
-      - ac_voltage
-      - ac_frequency
-      - dc_current
-      - dc_voltage
-      - day_energy
-      - year_energy
-      - total_energy
-      - grid_usage
-      - house_load
-      - panel_status
-    smartmeter: False
-
-  # Time and date
-  - platform: time_date
-    display_options:
-      - 'time'
-      - 'date'
-      - 'date_time'
-      - 'date_time_utc'
-      - 'date_time_iso'
-      - 'time_date'
-      - 'time_utc'
-      - 'beat'

@@ -3,7 +3,7 @@ title: 🏠
 # ApexCharts template settings (They need to be here)
 apexcharts_card_templates:
   default:
-    color_list: ['grey', 'orange', 'blue', 'red', 'purple', 'yellow', 'green', 'white']
+    color_list: ['lightsteelblue', 'orange', 'blue', 'red', 'purple', 'yellow', 'green', 'maroon', 'magenta', 'palegreen', 'lime']
 
   hygro_sensor:
     graph_span: 24h
@@ -13,7 +13,7 @@ apexcharts_card_templates:
       show_states: true
       colorize_states: true
     all_series_config:
-      stroke_width: 1
+      stroke_width: 0.75
       opacity: 0.3
       type: line #area
 
@@ -40,30 +40,41 @@ views:
           # Garbage Collection cards
           - type: custom:garbage-collection-card
             entity: sensor.garbage
-            icon_size: 30px
+            icon_size: 26px
             icon_color: green
+            hide_date: false
+          - type: custom:garbage-collection-card
+            entity: sensor.cesspool_emptying
+            icon_size: 13px
+            icon_color: grey
             hide_date: false
 
           # Weather 
-          # https://github.com/Yevgenium/lovelace-weather-card-chart
-          - type: 'custom:weather-card-chart'
+          # https://github.com/marcin-sadowski/weather-chart-card
+          - type: 'custom:weather-chart-card'
             title: Weather today
-            weather: weather.openweathermap
+            #entity: weather.openweathermap
+            entity: weather.climacell_hourly
             mode: hourly
+            show_main: true
+            show_attributes: true
 
           # The "new" Climacell integration is very barebones
           # Maybe this will help spice it up? https://community.home-assistant.io/t/ha-card-weather-conditions-setup-with-climacell-tomorrow-io-integration/314398
-          - type: 'custom:weather-card-chart'
+          - type: 'custom:weather-chart-card'
             name: forecast_weekly_name
             id: forecast_weekly_id
             title: Weekly forecast
-            weather: weather.climacell_daily
-
-      # Matti Landroid
-      - !include /config/lovelace/card_matti.yaml
-      
-      # Teppo Landroid
-      - !include /config/lovelace/card_teppo.yaml
+            entity: weather.climacell_daily
+            show_main: false
+            show_attributes: true
+            style: |
+              div.main {
+                display: none !important;
+              }
+              div.attributes {
+                display: none !important;
+              }
 
       # Electricity & Solar price
       - type: vertical-stack
@@ -81,23 +92,16 @@ views:
   - !include /config/lovelace/view_electricity.yaml
 
   # Multiple Apex Charts for Sonoff sensor values
-  - !include /config/lovelace/view_sonoff.yaml
+  - !include /config/lovelace/view_meters_long.yaml
 
-  - path: spares
-    title: ➕
+  # A dedicated view for all the security cameras
+  - !include /config/lovelace/view_cameras.yaml
+
+  # Some spare cards
+  - !include /config/lovelace/view_spares.yaml
     cards:
-      # Ecovacs Deebot N79S
       - type: entities
-        title: Vacuum
         entities:
-        - entity: vacuum.e000p8u2317701282290
-      - type: 'custom:vacuum-card'
-        entity: vacuum.e000p8u2317701282290
-        image: default
-        compact_view: false
-        show_name: true
-        show_toolbar: true
-        show_status: true
       - type: history-graph
         entities:
           - entity: sensor.speedtest_download

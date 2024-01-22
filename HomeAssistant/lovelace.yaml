@@ -2,21 +2,41 @@ mode: yaml
 # Include external resources only add when mode is yaml, otherwise manage in the resources in the lovelace configuration panel.
 resources:
 
+####################################################################################
+###                                                                              ###
+### ------------------- MANAGED THROUGH HACS ----------------------------------- ###
+###                                                                              ###
+####################################################################################
+
 # Used by Landroid integration cards - this one was installed with HACS, the others failed
 - type: module
   url: /hacsfiles/lovelace-fold-entity-row/fold-entity-row.js
+
+####################################################################################
+###                                                                              ###
+### ------------------- MANUALLY INSTALLED ONES -------------------------------- ###
+###                                                                              ###
+####################################################################################
 
 # Custom weather card 
 # https://github.com/Yevgenium/lovelace-weather-card-chart
 # The above was buggy, so used the fork here:
 # https://github.com/scstraus/lovelace-weather-card-chart/blob/e25acb9fbcd44f61da3e08d61b2ef7911840e82b/weather-card-chart.js 
+# The fork stopped working with 2023.8 and wasn't updated, so switched to this one (downloaded and ran npm i + npm start build):
+# https://github.com/marcin-sadowski/weather-chart-card
 - type: module
-  url: /local/weather-card-chart.js?v=2
+  url: /local/weather-chart-card.js?v=0
 
 # Weather card
 # https://github.com/r-renato/ha-card-weather-conditions
 - type: module
-  url: /local/ha-card-weather-conditions/ha-card-weather-conditions.js?v=4
+  url: /local/ha-card-weather-conditions/ha-card-weather-conditions.js?v=5
+
+# Vacuum card
+# https://github.com/denysdovhan/vacuum-card
+- type: module
+  url: /local/vacuum/vacuum-card.js?v=2
+
 # Garbage Collection custom card
 - type: module
   url: /local/garbage-collection-card/garbage-collection-card.js
@@ -35,12 +55,13 @@ resources:
 
 # My custom CSS
 - type: css
-  url: /local/custom-css/custom.css
+  url: /local/custom-css/custom.css?v=2
+
 
 dashboards:
   dashboard-important: # Needs to contain a hyphen (-)
     mode: yaml
     title: MAIN
-    icon: mdi:high-definition 
+    icon: mdi:emoticon
     show_in_sidebar: true
     filename: dashboard.yaml

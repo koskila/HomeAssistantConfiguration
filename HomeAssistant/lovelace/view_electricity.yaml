@@ -3,44 +3,40 @@ title: ⚡
 cards:
   - type: glance
     entities:
-    - entity: sensor.nordpool_kwh_fi_eur_3_001_024
-      name: ⚡
+    - entity: sensor.nordpool_kwh_fi_eur
+      name: 💲
     - entity: sensor.fronius_ac_power
       name: Fronius
+    - entity: sensor.electricity_price_actual
+      name: 🔌
+    - entity: sensor.electricity_net_import_export
+      name: ➕
+    - entity: sensor.energy_usage_grid_consumption_today
+      name: ⚡
+    - entity: input_boolean.using_nordpool_for_electricity_price
+      name: Nordpool?
+      tap_action:
+        action: toggle
+      hold_action:
+        action: more-info
+      
   # See this for specifications: https://community.home-assistant.io/t/any-good-ideas-are-welcome-nordpool-energy-price-per-hour/34646/44
-  - type: 'custom:apexcharts-card'
-    header:
-      show: true
-      title: Nordpool Price -> 48 hours
-      show_states: false
-    graph_span: 2d
-    span:
-      start: day
-    series:
-      - entity: sensor.nordpool_kwh_fi_eur_3_10_024
-        name: Today
-        data_generator: |
-          return entity.attributes.raw_today.map((entry) => {
-            return [new Date(entry.start), entry.value * 100];
-          });
-        type: column
-        show:
-          legend_value: false
-          in_header: false
-        extend_to_end: false
-      - entity: sensor.nordpool_kwh_fi_eur_3_10_024
-        name: Tomorrow
-        data_generator: |
-          return entity.attributes.raw_tomorrow.map((entry) => {
-            return [new Date(entry.start), entry.value * 100];
-          });
-        type: column
-        show:
-          legend_value: false
-          in_header: false
+  # Electricity & Solar price
+  - type: vertical-stack
+    cards:
+      - !include /config/lovelace/card_nordpool_apex.yaml
+      - type: history-graph
+        hours_to_show: 24
+        entities:
+        - entity: sensor.electricity_price_actual
+        - entity: sensor.electricity_net_import_export
+        #- entity: sensor.energy_usage_grid_consumption_today
+        - entity: sensor.fronius_ac_power
     now:
       label: "now"
       show: true
+  # Some help for defining units etc:
+  # https://smarthomescene.com/guides/apexcharts-card-advanced-graphs-for-your-home-assistant-ui/
   - type: 'custom:apexcharts-card'
     header:
       show: true
@@ -51,11 +47,13 @@ cards:
       stroke_width: 1
     series:
       - entity: sensor.fronius_day_energy
-        name: kwh
+        name: "Daily kWh"
+        unit: " kWh"
         group_by:
           func: max
           duration: 1d
-        type: line
+        type: column
+        transform: "return x * 1000;"
         show:
           legend_value: false
           in_header: false

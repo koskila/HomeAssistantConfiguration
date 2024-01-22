@@ -6,3 +6,7 @@
 **/tts*
 **/deps*
 .vscode*
+HomeAssistant/.sonoff.json
+HomeAssistant/home-assistant.log.fault
+HomeAssistant/home-assistant.log.1
+HomeAssistant/home-assistant_v2.db

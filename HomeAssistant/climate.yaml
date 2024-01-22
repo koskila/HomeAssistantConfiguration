@@ -1,8 +1,8 @@
+# THIS IS CURRENTLY (10/2023) NOT IN USE!
+
 - platform: gree
-  name: Upstairs AC
   port: 7000
   target_temp_step: 1
-  uid: 'gree_upstairs' # <some kind of device identifier. NOTE: for some devices this is optional>
 #  temp_sensor: <entity id of the EXTERNAL temperature sensor. For example: sensor.bedroom_temperature>
 #  encryption_key: <OPTIONAL: custom encryption key>
 #  lights: <OPTIONAL: input_boolean to switch AC lights mode on/off. For example: input_boolean.first_ac_lights>
@@ -13,9 +13,4 @@
 #  eightdegheat: <OPTIONAL: input_boolean used to switch 8 degree heating on/off on your first AC>
 #  air: <OPTIONAL: input_boolean used to switch air/scavenging on/off on your first AC>
 
-#- platform: gree
-#  name: Second AC
-#  host: <ip of your second AC>
-#  port: 7000
-#  mac: '<mac address of your second AC. NOTE: Format can be XX:XX:XX:XX:XX:XX or XX-XX-XX-XX-XX-XX depending on your model>'
 #  target_temp_step: 1…
