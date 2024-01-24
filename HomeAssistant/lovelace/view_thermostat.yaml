@@ -29,24 +29,48 @@ cards:
           secondary_info: last-changed
           icon_plus: 'mdi:chevron-up'
           icon_minus: 'mdi:chevron-down'
+          style: |
+            .cur-num{font-size:25px !important}
+            .cur-unit{color:orange; font-size:100% !important; opacity:1 !important}
+            .grid-left{color:red}
+            .grid-right{color:blue}
+
         - entity: input_number.temperature_target_mudroom
           type: 'custom:numberbox-card'
           name: Mudroom temp target
           secondary_info: last-changed
           icon_plus: 'mdi:chevron-up'
           icon_minus: 'mdi:chevron-down'
+          style: |
+            .cur-num{font-size:25px !important}
+            .cur-unit{color:orange; font-size:100% !important; opacity:1 !important}
+            .grid-left{color:red}
+            .grid-right{color:blue}
+
         - entity: input_number.temperature_target_office
           type: 'custom:numberbox-card'
           name: Office temp target
           secondary_info: last-changed
           icon_plus: 'mdi:chevron-up'
           icon_minus: 'mdi:chevron-down'
+          style: |
+            .cur-num{font-size:25px !important}
+            .cur-unit{color:orange; font-size:100% !important; opacity:1 !important}
+            .grid-left{color:red}
+            .grid-right{color:blue}
+
         - entity: input_number.temperature_target_villa
           type: 'custom:numberbox-card'
           name: Villa temp target
           secondary_info: last-changed
           icon_plus: 'mdi:chevron-up'
           icon_minus: 'mdi:chevron-down'
+          style: |
+            .cur-num{font-size:25px !important}
+            .cur-unit{color:orange; font-size:100% !important; opacity:1 !important}
+            .grid-left{color:red}
+            .grid-right{color:blue}
+
     #- type: entities
       #entities:
       #  - input_select.ac_desired_fan_setting
@@ -110,6 +134,11 @@ cards:
           secondary_info: last-changed
           icon_plus: 'mdi:chevron-up'
           icon_minus: 'mdi:chevron-down'
+          style: |
+            .cur-num{font-size:25px !important}
+            .cur-unit{color:orange; font-size:100% !important; opacity:1 !important}
+            .grid-left{color:red}
+            .grid-right{color:blue}
 
         - entity: input_number.excess_electricity_required_for_boiler
           type: 'custom:numberbox-card'
@@ -117,6 +146,11 @@ cards:
           secondary_info: last-changed
           icon_plus: 'mdi:chevron-up'
           icon_minus: 'mdi:chevron-down'
+          style: |
+            .cur-num{font-size:25px !important}
+            .cur-unit{color:orange; font-size:100% !important; opacity:1 !important}
+            .grid-left{color:red}
+            .grid-right{color:blue}
 
         - entity: input_number.boiler_on_target_hours
           type: 'custom:numberbox-card'
@@ -124,6 +158,11 @@ cards:
           secondary_info: last-changed
           icon_plus: 'mdi:chevron-up'
           icon_minus: 'mdi:chevron-down'
+          style: |
+            .cur-num{font-size:25px !important}
+            .cur-unit{color:orange; font-size:100% !important; opacity:1 !important}
+            .grid-left{color:red}
+            .grid-right{color:blue}
 
         - entity: input_number.excess_electricity_required_for_ac
           type: 'custom:numberbox-card'
@@ -131,6 +170,11 @@ cards:
           secondary_info: last-changed
           icon_plus: 'mdi:chevron-up'
           icon_minus: 'mdi:chevron-down'
+          style: |
+            .cur-num{font-size:25px !important}
+            .cur-unit{color:orange; font-size:100% !important; opacity:1 !important}
+            .grid-left{color:red}
+            .grid-right{color:blue}
 
     - type: entities
       title: AC status

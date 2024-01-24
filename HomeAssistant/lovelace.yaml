@@ -67,6 +67,10 @@ resources:
 - type: js
   url: /local/home-assistant-sun-card.js?v=1
 
+# Card mod for custom CSS 
+# https://github.com/thomasloven/lovelace-card-mod
+- type: js
+  url: /local/card-mod.js
 
 # My custom CSS
 - type: css
