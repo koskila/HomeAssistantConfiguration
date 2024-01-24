@@ -12,6 +12,21 @@ resources:
 - type: module
   url: /hacsfiles/lovelace-fold-entity-row/fold-entity-row.js
 
+#
+# https://github.com/htmltiger/numberbox-card
+- url: /hacsfiles/numberbox-card/numberbox-card.js
+  type: module
+
+# Auto-entities card
+# https://github.com/thomasloven/lovelace-auto-entities
+- type: module
+  url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+
+# History Explorer Card
+- url: /hacsfiles/history-explorer-card/history-explorer-card.js
+  type: module
+
+
 ####################################################################################
 ###                                                                              ###
 ### ------------------- MANUALLY INSTALLED ONES -------------------------------- ###

@@ -88,6 +88,9 @@ views:
       - type: 'custom:sun-card'
 
 
+  # Thermostat configuration
+  - !include /config/lovelace/view_thermostat.yaml
+
   # Electricity prices
   - !include /config/lovelace/view_electricity.yaml
 

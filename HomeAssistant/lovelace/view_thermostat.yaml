@@ -1,0 +1,335 @@
+path: thermo
+title: 🔥
+cards:
+    - type: entities
+      title: Heating targets
+      show_header_toggle: false
+      header:
+        type: graph
+        entity: sensor.average_temp_house_living_spaces
+        hours_to_show: 24
+        detail: 1
+      entities:
+        #- entity: input_number.temperature_target
+        #  secondary_info: last-changed
+        
+        #- entity: input_number.temperature_target
+        #  type: 'custom:numberbox-card'
+        #  icon: 'mdi:timelapse'
+        #  secondary_info: last-changed
+        #  unit: S
+
+        #- entity: input_number.temperature_target
+        #  type: 'custom:numberbox-card'
+        #  unit: time
+
+        - entity: input_number.temperature_target
+          type: 'custom:numberbox-card'
+          name: House temp target
+          secondary_info: last-changed
+          icon_plus: 'mdi:chevron-up'
+          icon_minus: 'mdi:chevron-down'
+        - entity: input_number.temperature_target_mudroom
+          type: 'custom:numberbox-card'
+          name: Mudroom temp target
+          secondary_info: last-changed
+          icon_plus: 'mdi:chevron-up'
+          icon_minus: 'mdi:chevron-down'
+        - entity: input_number.temperature_target_office
+          type: 'custom:numberbox-card'
+          name: Office temp target
+          secondary_info: last-changed
+          icon_plus: 'mdi:chevron-up'
+          icon_minus: 'mdi:chevron-down'
+        - entity: input_number.temperature_target_villa
+          type: 'custom:numberbox-card'
+          name: Villa temp target
+          secondary_info: last-changed
+          icon_plus: 'mdi:chevron-up'
+          icon_minus: 'mdi:chevron-down'
+    #- type: entities
+      #entities:
+      #  - input_select.ac_desired_fan_setting
+      #state_color: true
+      #header:
+      #  type: buttons
+      #  entities: []
+      #footer:
+      #  type: buttons
+      #  entities: []
+      #title: Desired fan mode for AC units
+
+    - type: entities
+      title: Weather forecast
+      footer:
+        type: graph
+        entity: sensor.openweathermap_temperature
+        hours_to_show: 24
+        detail: 1
+      entities:
+        - entity: weather.openweathermap
+        - entity: weather.climacell_daily
+
+    - type: entities
+      title: Away mode?
+      show_header_toggle: false
+      entities:
+        - entity: input_boolean.homeaway
+        - entity: input_boolean.officeaway
+        - entity: input_datetime.away_until
+
+    - type: entities
+      title: Heating or cooling?
+#      header:
+#        type: 
+#        entities:
+      entities:
+        - entity: input_boolean.ac_heating_mode
+        - input_select.ac_desired_fan_setting
+    
+    - type: entities
+      title: Electricity optimization
+      show_header_toggle: false
+      entities:
+        #- entity: input_number.electricityprice_cheaplimit
+        #  secondary_info: last-changed
+        
+        #- entity: input_number.electricityprice_cheaplimit
+        #  type: 'custom:numberbox-card'
+        #  icon: 'mdi:timelapse'
+        #  secondary_info: last-changed
+        #  unit: S
+
+        #- entity: input_number.electricityprice_cheaplimit
+        #  type: 'custom:numberbox-card'
+        #  unit: time
+
+        - entity: input_number.electricityprice_cheaplimit
+          type: 'custom:numberbox-card'
+          name: Limit for cheap electricity price
+          secondary_info: last-changed
+          icon_plus: 'mdi:chevron-up'
+          icon_minus: 'mdi:chevron-down'
+
+        - entity: input_number.excess_electricity_required_for_boiler
+          type: 'custom:numberbox-card'
+          name: Boiler kW trigger
+          secondary_info: last-changed
+          icon_plus: 'mdi:chevron-up'
+          icon_minus: 'mdi:chevron-down'
+
+        - entity: input_number.boiler_on_target_hours
+          type: 'custom:numberbox-card'
+          name: Boiler min hours
+          secondary_info: last-changed
+          icon_plus: 'mdi:chevron-up'
+          icon_minus: 'mdi:chevron-down'
+
+        - entity: input_number.excess_electricity_required_for_ac
+          type: 'custom:numberbox-card'
+          name: AC kW trigger
+          secondary_info: last-changed
+          icon_plus: 'mdi:chevron-up'
+          icon_minus: 'mdi:chevron-down'
+
+    - type: entities
+      title: AC status
+      state_color: true
+      entities:
+        - entity: climate.ac_upstairs
+        - entity: climate.ac_downstairs
+        - entity: climate.ac_office
+        - entity: climate.sonoff_100126bf0e # Mudroom thermostat
+        - entity: climate.sonoff_100187fd5f # saunalounge
+        - entity: climate.sonoff_100187fd95 # 1stfloor bathroom
+        - entity: switch.sonoff_10013aab22 # wifi plug 3 @ Villa
+          name: "Villa plug"
+        
+    - type: "custom:history-explorer-card"
+      combineSameUnits: true
+      defaultTimeRange: 48h  
+      header: House Temperature Averages
+      lineMode: stepped
+      lineGraphHeight: 350     # default line graph height is 250
+      graphs:
+        - type: line
+          options:
+            #ymin: 0       # Minimum Y locked to 0
+            ymax: 32      # Maximum Y locked to 40
+          #  interval: minute
+          #  stacked: false
+          entities:
+            - entity: sensor.temperature_target_downstairs
+              #name: "downstairs target"
+            - entity: sensor.temperature_target_upstairs
+              #name: "upstairs target"
+            - entity: sensor.average_temperature_1stfloor
+              lineMode: lines
+              #name: "downstairs temp"
+            - entity: sensor.average_temperature_2ndfloor
+              #name: "upstairs temp"
+              lineMode: lines
+            - entity: sensor.average_temperature_basement
+              #name: "basement temp"
+              lineMode: lines #curves
+
+      # https://github.com/alexarch21/history-explorer-card
+    - type: "custom:history-explorer-card"
+      combineSameUnits: true
+      defaultTimeRange: 48h  
+      header: "Mudroom temps"
+      lineMode: stepped
+      entityOptions:
+      graphs:
+        - type: line
+          options:
+            #showSamples: true
+          entities:
+            - entity: sensor.temperature_target_thermostat_mudroom
+              #name: "Mudroom adjusted temp target"
+            - entity: input_number.temperature_target_mudroom
+              #name: "Mudroom target temp"
+            - entity: sensor.temperature_actual_mudroom
+              #name: "Mudroom thermostat temperature reading"
+              lineMode: curved
+            - entity: sensor.temperature_offset_mudroom
+            - entity: climate.sonoff_100126bf0e
+              name: Mudroom thermostat target temperature
+
+    - type: "custom:history-explorer-card"
+      combineSameUnits: true
+      defaultTimeRange: 48h
+      header: Villa temp
+      graphs:
+        - type: line
+          options:
+            showSamples: true
+          entities:
+            - entity: sensor.sonoff_a4800190d2_temperature
+            - entity: input_number.temperature_target_villa
+              lineMode: stepped
+            - entity: sensor.target_temperature_villa_adjusted
+              lineMode: stepped
+        - type: timeline
+          title: Non-numerical sensors
+          entities:
+            - entity: switch.sonoff_10013aab22
+            - entity: automation.villa_ac_based_on_temperature
+
+    - type: entities
+      title: "What's up"
+      state_color: true
+      entities:
+        - entity: binary_sensor.ha_auxiliaryheatingneeded
+        - entity: binary_sensor.ha_cheapelectricityavailable
+        - entity: binary_sensor.electricity_is_cheap_or_at_least_cheapest_today
+        - entity: binary_sensor.ha_belowfreezingforecasted
+        - entity: sensor.temperature_offset_colder_forecasted
+        - entity: binary_sensor.ha_boilershouldbeon
+
+
+#    - type: history-graph
+#      title: "Aux heating"
+#      entities:
+#        - entity: input_number.temperature_target
+#        - entity: sensor.temperature_target_house_adjusted
+#        - entity: sensor.average_temp_house_living_spaces
+#        - entity: binary_sensor.ha_auxiliaryheatingneeded
+#        - entity: switch.sonoff_10013ab310
+
+    - type: "custom:history-explorer-card"
+      combineSameUnits: true
+      defaultTimeRange: 48h
+      header: "Aux heating"
+      lineMode: stepped
+      entityOptions:
+        sensor:
+          fill: rgba(0,0,0,0)
+      graphs:
+        - type: line
+          options:
+            showSamples: false
+          entities:
+            - entity: input_number.temperature_target
+            - entity: sensor.temperature_target_house_adjusted
+            - entity: sensor.average_temp_house_living_spaces
+              lineMode: curved
+            - entity: sensor.temperature_target_house_adjusted
+              process: 'console.log(state)'
+              name: 'Aux heating trigger'
+        - type: timeline
+          title: Non-numerical sensors
+          entities:
+            - entity: binary_sensor.ha_auxiliaryheatingneeded
+              name: "Aux heat needed"
+            - entity: switch.sonoff_10013ab310
+              name: "Thermostat state"
+
+    - type: "custom:history-explorer-card"
+      combineSameUnits: true
+      defaultTimeRange: 48h  
+      header: "Offsets and boosts"
+      lineMode: stepped
+      stacked: true
+      lineGraphHeight: 300     # default line graph height is 250
+      entityOptions:
+        sensor:
+          stacked: true
+          #height: 150
+      graphs:
+        - type: line
+          options:
+            interval: minute
+            stacked: false
+          entities:
+            - entity: sensor.temperature_offset_homecoming_tomorrow
+            - entity: sensor.temperature_offset_colder_forecasted_reserves
+            - entity: sensor.temperature_offset_colder_forecasted_today_reserves
+        - type: line
+          options:
+            interval: minute
+            stacked: false
+          entities:
+            - entity: sensor.temperature_offset_downstairs
+            - entity: sensor.temperature_offset_homecoming_tomorrow
+            - entity: sensor.temperature_offset_time
+            - entity: sensor.temperature_offset_colder_forecasted
+            - entity: sensor.temperature_offset_colder_forecasted_today
+        - type: line
+          options:
+            interval: minute
+            stacked: false
+          entities:
+            - entity: sensor.temperature_offset_upstairs
+            - entity: sensor.temperature_offset_homecoming_tomorrow
+            - entity: sensor.temperature_offset_time
+            - entity: sensor.temperature_offset_colder_forecasted
+            - entity: sensor.temperature_offset_colder_forecasted_today
+
+    - type: history-graph
+      title: Boiler planning
+      hours_to_show: 48
+      show_names: true
+      entities:
+        - binary_sensor.ha_excesssolaravailable_high
+        - binary_sensor.ha_excesssolaravailable_low
+        - binary_sensor.ha_excesselectricityavailable_low
+        - binary_sensor.electricity_is_cheap_or_at_least_cheapest_today
+        - sensor.cheapest_hours_of_the_day
+        - binary_sensor.ha_boilershouldbeon
+        - binary_sensor.ha_cheapelectricityavailable
+        - switch.sonoff_10009436b5_1 # Water boiler
+        - binary_sensor.ha_legionellaBusted
+
+    - type: entities
+      title: Boiler hours
+      show_header_toggle: false
+      entities:
+        - sensor.boiler_hours_today
+        - sensor.boiler_hours_yesterday
+        - sensor.boiler_hours_daysbefore_2
+        - sensor.boiler_hours_daysbefore_3
+        - sensor.boiler_hours_daysbefore_4
+        - sensor.boiler_hours_daysbefore_5
+        - sensor.boiler_hours_daysbefore_6
+        - sensor.boiler_hours_daysbefore_7

@@ -12,6 +12,7 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 camera: !include cameras.yaml
 sensor: !include sensors.yaml
+input_number: !include input_numbers.yaml
 
 # Add Gree Climate (REMOVED 20.10.2023 to replace with core GREE plugin)
 #climate: !include climate.yaml

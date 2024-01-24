@@ -1,0 +1,66 @@
+electricityprice_cheaplimit:
+    name: What price is considered cheap?
+    initial: 0.04
+    min: 0.00
+    max: 0.40
+    step: 0.005
+    unit_of_measurement: "€"
+
+temperature_target:
+    name: Target Temperature for the house
+    min: 08
+    max: 30
+    step: 1
+    unit_of_measurement: "°C"
+
+temperature_target_mudroom:
+    name: Target Temperature for the mudroom
+    min: 08
+    max: 30
+    step: 1
+    unit_of_measurement: "°C"
+
+temperature_target_villa:
+    name: Target Temperature for Villa
+    min: 01
+    max: 30
+    step: 1
+    unit_of_measurement: "°C"
+
+temperature_target_office:
+    name: Office temperature target
+    min: 01
+    max: 30
+    step: 1
+    unit_of_measurement: "°C"
+
+boiler_on_target_hours:
+    name: How many hours boiler should be on at least?
+    min: 00
+    max: 24
+    step: 1
+    unit_of_measurement: "h"
+
+excess_electricity_required_for_boiler:
+    name: How much excess electricity required to start boiler (kW)?
+    min: 1
+    max: 4
+    step: 0.10
+    initial: 2
+    unit_of_measurement: "kW"
+
+excess_electricity_required_for_ac:
+    name: How much excess electricity required to start AC (kW)?
+    min: 0.25
+    max: 4
+    step: 0.05
+    initial: 0.5
+    unit_of_measurement: "kW"
+
+boiler_on_hours_legionella_busting_cycle:
+    name: How many hours boiler will be on when killing legionella?
+    min: 00
+    max: 24
+    step: 1
+    initial: 6
+    unit_of_measurement: "h"
