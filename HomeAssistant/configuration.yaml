@@ -27,6 +27,16 @@ recorder:
 
 # Discovery of devices automatically if supported
 discovery:
+  - platform: tod
+    name: ha_night
+    after: sunset
+    before: sunrise
+
+  - platform: tod
+    name: ha_smallhours
+    after: "00:30"
+    before: "06:30"
+
 
 stream:
 ffmpeg:
