@@ -50,6 +50,9 @@ garbage_collection:
     - "tue"
     first_week: 1 # This might change year-on-year
 
+# Text to speech
+tts:
+  - platform: google_translate
 
 # Temperature, hygro, door etc sensors
 sonoff:
