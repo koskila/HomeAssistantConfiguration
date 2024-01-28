@@ -21,6 +21,12 @@
     - panel_status
   smartmeter: False
 
+# Add Illuminance sensor
+# https://github.com/pnbruckner/ha-illuminance
+- platform: illuminance
+  name: Estimated Illuminance
+  entity_id: weather.openweathermap
+
 # More Nordpool!
 - platform: nordpool
 
